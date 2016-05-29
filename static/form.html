@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="uk">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Сервіс обліку студентів - форма студента</title>
+		<meta name="description" value ="Система обліку студетів навчального закладу - форма студента" />
+
+		<!-- Include Styles -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./css/main.css">
+	<body>
+		<!-- Start Container -->
+		<div class="container">
+			<!-- Start Main Page Content -->
+			<div class="row" id="content-columns">
+				<div class="col-xs-12" id="content-column">
+					<h1>Форма редагування Студента</h1>
+
+					<!-- Start Form Add Student-->
+					<form role="form" class="form-horizontal">
+						<div class="form-group">
+							<label for="inputName" class="col-sm-2">Ім’я*</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="inputName">
+							</div>
+							 
+						</div>
+						<div class="form-group">
+							<label for="inputSoname" class="col-sm-2">По-батькові</label>
+							<div class="col-sm-4">
+							    <input type="text" class="form-control" id="inputSoname">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputFirstName" class="col-sm-2">Прізвище*</label>
+							<div class="col-sm-4">
+							    <input type="text" class="form-control" id="inputFirstName">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputTicet" class="col-sm-2">№ Білету*</label>
+							<div class="col-sm-4">
+							    <input type="text" class="form-control" id="inputTicet">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputBirthday" class="col-sm-2">Дата народженя</label>
+							<div class="col-sm-4">
+							    <input type="date" class="form-control" id="inputBirthday">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputPhoto" class="col-sm-2">Фото</label>
+							<div class="col-sm-4">
+							    Наразі:<a href="#">student_photos/None_podoba3_1.jpg</a>
+							    <input type="checkbox">
+							    <br> Очистити<br>
+							    <br>
+							    <span class="col-sm-2">Змінити:</span><input type="file" id="inputFile" class="col-sm-10">  
+							   
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputGroup" class="col-sm-2">Группа*</label>
+							<div class="col-sm-4">
+							    <select class="form-control" id="inputGroup">
+  									<option class="active">МтМ-21</option>
+  									<option>МтМ-22</option>
+  									<option>МтМ-23</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputNote" class="col-sm-2">Додаткові нотатки</label>
+							<div class="col-sm-4">
+								<textarea class="form-control" rows="3" id="inputNote"></textarea>
+							    
+							</div>
+						</div>
+					</form>
+					<!-- End Form Add Student -->
+					<!-- Start Button -->
+
+				</div>
+				
+			</div>
+			<!-- End Main Page Content -->
+			<div class="row" id="button-form">
+					<div class="col-sm-10 col-sm-offset-2">
+						<a href="index.html" class="btn btn-primary active" role="button">Зберегти</a>
+						<a href="index.html" class="btn btn-default active" role="button">Скасувати</a>
+
+					</div>
+				</div>
+			<!-- Start Footer -->
+			<div class="row" id="footer">
+				<div class="col-xs-12">
+					&copy; 2016 Сервіс Обліку Студентів
+				</div>
+			</div>
+			<!-- End Footer -->
+		
+		</div>
+		<!-- End Container -->
+
+		<!-- Javascripts Section -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+		<!--<script src="https://cdn.jsdelivr.net/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+		<script src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	</body>
+</html>

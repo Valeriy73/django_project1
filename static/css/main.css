@@ -23,3 +23,20 @@ h1, h2, h3, h4, h5, h6 {
 	line-height: 30px;
 	color: #555555;
 }
+#vidvid li a{
+	border: 0;
+}
+#vidvid li a:hover{
+	background-color: #ffffff;
+}
+#vidvid li a:focus{
+	background-color: #ffffff;
+}
+#button-form{
+	background-color: #e6e6e6;
+	margin-bottom: 30px;
+	height: 50px;
+}
+#button-form a{
+	margin-top: 15px;
+}

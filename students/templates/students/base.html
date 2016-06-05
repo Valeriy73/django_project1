@@ -1,0 +1,80 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="uk">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Сервіс обліку студентів - {% block meta_title%}{% endblock meta_title%} </title>
+		<meta name="description" value ="Система обліку студетів навчального закладу" />
+
+		<!-- Include Styles -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="{{ PORTAL_URL }}{% static "css/main.css" %}">
+
+        {% block extra_css %}{% endblock extra_css %}
+
+	<body>
+		<!-- Start Container -->
+		<div class="container">
+			<!-- Start Header-->
+			<div class="row" id="header">
+				<!-- Logo -->
+				<div class="col-xs-8">
+					 <h1>Сервіс Обліку Студентів</h1>
+				</div>
+				<!-- Groups Selector -->
+				<div class="col-xs-4" id="group-selector">
+					<strong>Группа:</strong>
+					<select>
+						<option value="">Усі Студенти</option>
+						<option value="">МтМ - 21, Подоба Віталій (№ 254)</option>
+						<option value="">МтМ - 22, Корост Андрій (№ 2123)</option>
+					</select>
+				</div>
+			</div>
+			<!-- End Header -->
+
+			<!-- Start SubHeader -->
+			<div class="row" id="sub-header">
+				<div class="col-xs-12">
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" {% if request.path == '/' %}class="active"{% endif %}><a href="{% url "home" %}">Студенти</a></li>
+						<li role="presentation" {% if '/journal' in request.path %}class="active"{% endif %}><a href="/journal">Відвідувіння</a></li>
+						<li role="presentation" {% if '/groups' in request.path %}class="active"{% endif %}><a href="{% url "groups" %}">Групи</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- End SubHeader -->
+
+			<!-- Start Main Page Content -->
+			<div class="row" id="content-columns">
+				<div class="col-xs-12" id="content-column">
+					{% comment "Not used alert so far" %}
+					<!-- Status Message -->
+					<div class="alert alert-warning">Зміни скасовано.</div>
+					{% endcomment %}
+					<h2>{% block title %}{% endblock title %}</h2>
+					{% block content %}{% endblock content %}
+
+				</div>
+			</div>
+			<!-- End Main Page Content -->
+
+			<!-- Start Footer -->
+			<div class="row" id="footer">
+				<div class="col-xs-12">
+					&copy; 2016 Сервіс Обліку Студентів
+				</div>
+			</div>
+			<!-- End Footer -->
+		
+		</div>
+		<!-- End Container -->
+
+		<!-- Javascripts Section -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+		<!--<script src="https://cdn.jsdelivr.net/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+		<script src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		{% block extra_js %}{% endblock extra_js %}
+	</body>
+</html>

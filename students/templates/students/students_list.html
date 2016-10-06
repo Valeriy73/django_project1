@@ -11,22 +11,44 @@
 					<a class="btn btn-primary" href="{% url "students_add" %}">Додати Студента</a>
 					<!-- Start Students Listing -->
 					<table class="table table-hover table-striped">
+						{% with order_by=request.GET.order_by reverse=request.GET.reverse %}
 						<thead>
 							<tr>
 								<th><a href="">№</a></th>
 								<th>Фото</th>
-								<th><a href="">Прізвище &uarr;</a></th>
-								<th><a href="#">Ім’я</a></th>
-								<th><a href="#">№ Білету</a></th>
+								<th><a href="{% url "home" %}?order_by=last_name{% if order_by == 'last_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
+								Прізвище
+								{% if order_by == 'last_name' and reverse != '1' %}&uarr;
+								{% elif order_by == 'last_name' and reverse == '1' %}&darr;
+								{% endif %}</a></th>
+								<th><a href="{% url "home" %}?order_by=first_name{% if order_by == 'first_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
+								Ім’я
+                                {% if order_by == 'first_name' and reverse != '1' %}&uarr;
+								{% elif order_by == 'first_name' and reverse == '1' %}&darr;
+                                {% endif %}</a></th>
+								</a></th>
+								<th><a href="{% url "home" %}?order_by=ticket{% if order_by == 'ticket' and reverse != '1' %}&amp;reverse=1{% endif %}">
+								№ Білету
+                                {% if order_by == 'ticket' and reverse != '1' %}&uarr;
+								{% elif order_by == 'ticket' and reverse == '1' %}&darr;
+                                {% endif %}</a></th>
+								</a></th>
 								<th>Дії</th>
 							</tr>
 						</thead>
+						{% endwith %}
 						<tbody>
 							
 							{% for student in students %}
 							<tr>
 								<td>{{ forloop.counter}}</td>
-								<td><img width="30" height="30" class="img-circle" src="{% static student.image %}"></td>
+								<td>
+                                   {% if student.photo %} 
+								    <img width="30" height="30" class="img-circle" src="{{ student.photo.url }}">
+                                    {% else %}
+                                       <img width="30" height="30" class="img-circle" src="{% static "img/default-user-image.jpg" %}">
+                                    {% endif %}
+								</td> 
 								<td><a title="Редагувати" href="{% url "students_edit" student.id %}">{{ student.last_name}}</a></td>
 								<td><a title="Редагувати" href="{% url "students_edit" student.id %}">{{ student.first_name}}</a></td>
 								<td>{{ student.ticket}}</td>
@@ -56,5 +78,21 @@
 					</table>
 					<!-- End Student Listing -->
 					<!-- Sart Pagination -->
-					{% include "students/pagination.html" %}
+					{% if students.has_other_pages %}
+					{% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+					<nav>
+						<ul class="pagination">
+							<li><a href="{% url "home" %}?page=1&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">&laquo;</a></li>
+							{% for p in students.paginator.page_range %}
+							<li {% if students.number == p %}class="active"{% endif %}>
+								<a href="{% url "home" %}?page={{ p }}&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">{{ p }}</a>
+							</li>
+							{% endfor %}
+							<li>
+								<a href="{% url "home" %}?page={{ students.paginator.num_pages }}&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">&raquo;</a>
+							</li>
+						</ul>
+					</nav>
+					{% endwith %}
+					{% endif %}
 					{% endblock content %}

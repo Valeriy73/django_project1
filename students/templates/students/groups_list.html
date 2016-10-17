@@ -53,7 +53,22 @@
                 </table>
              	<!-- End Table Students -->
              	<!-- Pagination -->
-                {% include "students/pagination.html" %}
-             	
+                {% if groups.has_other_pages %}
+                <nav>
+                    <ul class="pagination">
+                        <li>
+                            <a href="{% url "groups" %}?page=1">&laquo;</a>
+                        </li>
+                        {% for p in groups.paginator.page_range %}
+                        <li {% if groups.number == p %}class="active"{% endif %}>
+                            <a href="{% url "groups" %}?page={{ p }}">{{ p }}</a>
+                        </li>
+                        {% endfor %}
+                        <li>
+                            <a href="{% url "groups" %}?page={{ groups.paginator.num_pages }}">&raquo;</a>
+                        </li>
+                    </ul>
+                </nav>
+             	{% endif %}
                 {% endblock content %}
              

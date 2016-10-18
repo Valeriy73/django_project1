@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from ..models.student import Student
+from ..models.group import Group
 
 # Views for Students
 def students_list(request):
@@ -36,7 +37,8 @@ def students_list(request):
                   {'students': students})
 
 def students_add(request):
-    return HttpResponse('<h1>Students ADD Form</h1>')
+    return render(request, 'students/students_add.html',
+                  {'groups': Group.objects.all().order_by('title')})
 
 def students_edit(request, sid):
     return HttpResponse('<h1>Edit students %s</h1>' %sid)

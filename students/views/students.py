@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from datetime import datetime
 
 from ..models.student import Student
 from ..models.group import Group
@@ -67,7 +68,7 @@ def students_add(request):
                 errors['birthday'] = u"Дата народження є обов'язковим"
             else:
                 try:
-                    datetime.striptime(birthday, '%Y-%m-%d')
+                    datetime.strptime(birthday, '%Y-%m-%d')
                 except Exception:
                     errors['birthday']= u"Введіть коректний формат дати (напр. 1984-12-30)"
                 else:
@@ -124,4 +125,3 @@ def students_edit(request, sid):
 
 def students_delete(request, sid):
     return HttpResponse('<h1>Delete Students %s</h1>' %sid)
-u’%s?status_message=Додавання студента скасовано!’ % reverse(’home’))

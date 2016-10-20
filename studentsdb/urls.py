@@ -18,6 +18,7 @@ from django.contrib import admin
 import students.views.students
 import students.views.groups
 import students.views.journal
+import students.views.contact_admin
 from .settings import MEDIA_ROOT, DEBUG
 
 urlpatterns = [
@@ -41,6 +42,9 @@ urlpatterns = [
     url(r'^journal/$', students.views.journal.journal_list, name='journal'),
     url(r'^journal/(?P<jid>\d+)/$', students.views.journal.journal_stud, name='journal_stud'),
     url(r'^journal/update', students.views.journal.journal_update, name='journal_update'),
+
+    # Contact Admin Form
+    url(r'^contact-admin/$', students.views.contact_admin.contact_admin, name='contact_admin'),
 
     url(r'^admin/', include(admin.site.urls)),
 ]

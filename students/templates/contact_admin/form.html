@@ -1,6 +1,19 @@
 {% extends "students/base.html" %}
 
+{% block status_message %}
+
+{% if form.errors %}
+	<div class="alert alert-warning" role="alert">
+		Будь-ласка, виправте наступні помилки
+	</div>
+{% endif %}
+
+{{ block.super }}
+
+{% endblock %}
+
 {% load static from staticfiles %}
+{% load crispy_forms_tags %}
 
 {% block meta_title%}Зв'язок із Адміністратором{% endblock meta_title%}
 
@@ -8,12 +21,6 @@
 
 {% block content %}
 	
-<form action="{% url "contact_admin" %}" method="POST">
-	{% csrf_token %}
-
-	{{ form.as_p }}	
-
-	<input type="submit" value="Надіслати" name="send_button">
-</form>
+{% crispy form %}
 
 {% endblock content %}

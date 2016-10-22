@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'students',
+    'crispy_forms',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -113,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'uk'
 
 TIME_ZONE = 'UTC'
 
@@ -136,10 +137,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 
 # email settings
 # please, set here you smtp server details and your admin email
-ADMIN_EMAIL = 'turlera1@ukr.net'
-EMAIL_HOST = 'smtp.mandrillapp.com'
+ADMIN_EMAIL = 'turvalera@ukr.net'
+EMAIL_HOST = 'smtp.ukr.net'
 EMAIL_PORT = '465'
 EMAIL_HOST_USER = 'turlera1@ukr.net'
 EMAIL_HOST_PASSWORD = 'turlera'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+# django-crispy-forms
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

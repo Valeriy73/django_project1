@@ -1,0 +1,22 @@
+{% extends "students/base.html" %}
+
+	{% block status_message %}
+		{% if errors %}
+			<div class="alert alert-warning" role="alert">
+				Будь-ласка, виправте наступні помилки
+			</div>
+		{% endif %}
+	{% endblock %} 
+
+{% load static from staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block meta_title%}Редагувати Студента{% endblock meta_title%}
+
+{% block title %}Редагувати Студента{% endblock title %}
+
+{% block content %}
+
+{% crispy form %}
+	
+{% endblock content %}

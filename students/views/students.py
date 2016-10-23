@@ -98,9 +98,15 @@ def students_add(request):
                 else:
                     data['student_group'] = groups[0]
 
-            photo = request.POST.get('photo')
+            photo = request.FILES.get('photo')
             if photo:
-                data['photo'] = photo
+                format_pic = ('jpg', 'jpeg', 'png', 'gif') # кортеж из графических форматов
+                if photo.name.lower().endswith(format_pic) == False: #конец строки сравниваем с кортежом
+                    errors['photo'] = u'Це не э зображенням!'
+                elif photo.size > 2*1024*1024:
+                    errors['photo'] = u'Розмір файла повинен бути меньшим ніж 2Мб'
+                else:
+                    data['photo'] = photo
 
             # Якщо дані були введені коректно:
                 # Створюємо та зберігаємо студента в базу

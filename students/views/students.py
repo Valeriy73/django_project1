@@ -8,6 +8,7 @@ from datetime import datetime
 from django.views.generic.edit import UpdateView, DeleteView
 from django.forms import ModelForm
 
+from django.contrib import messages
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -114,7 +115,8 @@ def students_add(request):
                 student = Student(**data)
                 student.save()
                 # Повертаємо користувача до списку студентів
-                return HttpResponseRedirect(u'%s?status_message=Студента успішно додано!' %reverse('home'))
+                messages.success(request, u"Студента успішно додано!")
+                return HttpResponseRedirect(reverse('home'))
             # Якшо дані були введені некоректно:
                 # Вшддаємо шаблон форми разом із знайденими помилками
             else:
@@ -124,7 +126,8 @@ def students_add(request):
         # Якщо кнопка Скасувати була натиснута:
         elif request.POST.get('cancel_button') is not None:
             # Повертаємо користувача до списку студентів
-            return HttpResponseRedirect(u'%s?status_message=Додавання студента скасовано!' %reverse('home'))
+            messages.warning(request, u'Додавання студента скасовано!')
+            return HttpResponseRedirect(reverse('home'))
     # Якщо форма не була запощена:
         # повертаємо код початкового стану форми
     else:

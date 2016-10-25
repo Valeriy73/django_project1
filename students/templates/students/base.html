@@ -61,14 +61,16 @@
 				<div class="col-xs-12" id="content-column">
 					{% block status_message %}
 					<!-- Status Message -->
-					{% if request.GET.status_message %}
-					<div class="alert alert-warning" role="alert">{{ request.GET.status_message }}</div>
+					{% if messages %}
+					{% for message in messages %}
+						<div class="alert alert-warning" role="alert">{{ message }}</div>
+					{% endfor %}
 					{% endif %}
 					{% endblock %}
 
 					<h2>{% block title %}{% endblock title %}</h2>
 					{% block content %}{% endblock content %}
-
+					Сообщение {{ message }}
 				</div>
 			</div>
 			<!-- End Main Page Content -->

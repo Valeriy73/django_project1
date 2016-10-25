@@ -115,7 +115,7 @@ def students_add(request):
                 student = Student(**data)
                 student.save()
                 # Повертаємо користувача до списку студентів
-                messages.success(request, u"Студента успішно додано!")
+                messages.success(request, u"Студента %s %s успішно додано!" %(data['last_name'], data['first_name']))
                 return HttpResponseRedirect(reverse('home'))
             # Якшо дані були введені некоректно:
                 # Вшддаємо шаблон форми разом із знайденими помилками

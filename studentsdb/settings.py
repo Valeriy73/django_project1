@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'students',
     'crispy_forms',
+    'django.contrib.sites',
+    'contact_form',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -142,8 +144,16 @@ EMAIL_HOST = 'smtp.ukr.net'
 EMAIL_PORT = '465'
 EMAIL_HOST_USER = 'turlera1@ukr.net'
 EMAIL_HOST_PASSWORD = 'turlera'
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
+
+ADMINS = (
+    ('Valeriy', 'turlera@ukr.net'),   # email will be sent to your_email
+)
+
+MANAGERS = ADMINS
+
+SITE_ID = 1
 # django-crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

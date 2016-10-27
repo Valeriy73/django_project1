@@ -1,0 +1,23 @@
+
+
+{% extends "students/base.html" %}
+
+{% load static from staticfiles %}
+
+
+{% block meta_title%}Зв'язок із Адміністратором{% endblock meta_title%}
+
+{% block title %}Зв'язок із Адміністратором{% endblock title %}
+
+{% block content %}
+	
+
+  <p>Відправьте нам листа с допомогою цією форми</p>
+  <form method="post">{% csrf_token %}
+    <p>Нік: <input type="text" name="name"></p>
+    <p>Ваш e-mail: <input type="text" name="email"></p>
+    <p>Повідомлення: <textarea name="body" rows="10" cols="50"></textarea></p>
+    <input type="submit" value="Submit">
+  </form>
+
+{% endblock content %}

@@ -49,7 +49,9 @@
 
 						<li role="presentation" {% if '/groups' in request.path %}class="active"{% endif %}><a href="{% url "groups" %}">Групи</a></li>
 
-						<li role="presentation" {% if '/contact' in request.path %}class="active"{% endif %}><a href="/contact">Контакт</a></li>
+						<li role="presentation" {% if '/contact-admin' in request.path %}class="active"{% endif %}><a href="{% url "contact_admin" %}">Контакт 1</a></li>
+
+						<li role="presentation" {% if '/contact1' in request.path %}class="active"{% endif %}><a href="/contact1">Контакт 2</a></li>
 
 					</ul>
 				</div>

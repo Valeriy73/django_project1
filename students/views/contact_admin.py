@@ -6,6 +6,9 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 from studentsdb.settings import ADMIN_EMAIL
+from django.views.generic.edit import FormView
+
+from django.contrib import messages
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -14,7 +17,7 @@ class ContactForm(forms.Form):
     from_email = forms.EmailField(label = u"Ваша Емейл Адреса")
     subject = forms.CharField(label = u"Заголовок листа", max_length=128)
     message = forms.CharField(label = u"Текст повідомлення", max_length=2560, widget=forms.Textarea)
-    
+
     def __init__(self, *args, **kwargs):
         # call original initializator
         super(ContactForm, self).__init__(*args, **kwargs)
@@ -36,6 +39,27 @@ class ContactForm(forms.Form):
         # form buttons
         self.helper.add_input(Submit('send_button', u'Надіслати'))
 
+class ContactAdmin(FormView):
+    template_name = 'contact_admin/form.html'
+    form_class = ContactForm
+    success_url = '/contact-admin'
+
+    def form_valid(self, form):
+        subject = form.cleaned_data['subject']
+        message = form.cleaned_data['message']
+        from_email = form.cleaned_data['from_email']
+
+        try:
+            send_mail(subject, message, from_email, [ADMIN_EMAIL])
+
+        except Exception:
+            messages.warning(request, u'Під час відправки листа виникла непередбачувана ' \
+                          u'помилка. Спробуйте скористатись даною формою пізніше.')
+        else:
+            messages.success(request, u'Повідомлення успішно надіслане!')
+
+
+"""
 def contact_admin(request):
     # check if form was posted
     if request.method == 'POST':
@@ -53,10 +77,10 @@ def contact_admin(request):
                 send_mail(subject, message, from_email, [ADMIN_EMAIL])
 
             except Exception:
-                message = u'Під час відправки листа виникла непередбачувана ' \
-                          u'помилка. Спробуйте скористатись даною формою пізніше.'
+                messages.warning(request, u'Під час відправки листа виникла непередбачувана ' \
+                          u'помилка. Спробуйте скористатись даною формою пізніше.')
             else:
-                message = u'Повідомлення успішно надіслане!'
+                messages.success(request, u'Повідомлення успішно надіслане!')
 
             # redirect to same contact page with success message
             return HttpResponseRedirect(u'%s?status_message=%s' % (reverse('contact_admin'), message))
@@ -66,3 +90,5 @@ def contact_admin(request):
         form = ContactForm()
 
     return render(request, 'contact_admin/form.html', {'form': form})
+
+    messages.warning(request, u'Додавання студента скасовано!')"""

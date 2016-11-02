@@ -20,13 +20,15 @@ import students.views.groups
 import students.views.journal
 import students.views.contact_admin
 from .settings import MEDIA_ROOT, DEBUG
-from students.views.students import StudentUpdateView, StudentDeleteView
+from students.views.students import StudentUpdateView, StudentDeleteView, StudentCreateView
 from students.views.contact_admin import ContactAdmin
 
 urlpatterns = [
     # Students urls
     url(r'^$', students.views.students.students_list, name='home'),
-    url(r'^students/add/$', students.views.students.students_add,
+    #url(r'^students/add/$', students.views.students.students_add,
+    #    name='students_add'),
+    url(r'^students/add/$', StudentCreateView.as_view(),
         name='students_add'),
     url(r'^students/(?P<pk>\d+)/edit/$', StudentUpdateView.as_view(),
         name='students_edit'),

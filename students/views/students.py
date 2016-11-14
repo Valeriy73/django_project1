@@ -118,7 +118,7 @@ def students_add(request):
                 messages.success(request, u"Студента %s %s успішно додано!" %(data['last_name'], data['first_name']))
                 return HttpResponseRedirect(reverse('home'))
             # Якшо дані були введені некоректно:
-                # Вшддаємо шаблон форми разом із знайденими помилками
+                # Віддаємо шаблон форми разом із знайденими помилками
             else:
                 return render (request, 'students/students_add.html',
                     {'groups': Group.objects.all().order_by('title'),

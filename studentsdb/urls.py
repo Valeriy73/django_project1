@@ -19,6 +19,7 @@ import students.views.students
 import students.views.groups
 import students.views.journal
 import students.views.contact_admin
+import students.views.students_9
 from .settings import MEDIA_ROOT, DEBUG
 from students.views.students import StudentUpdateView, StudentDeleteView, StudentCreateView
 from students.views.contact_admin import ContactAdmin
@@ -30,8 +31,9 @@ urlpatterns = [
     #    name='students_add'),
     url(r'^students/add/$', StudentCreateView.as_view(),
         name='students_add'),
-    url(r'^students/(?P<pk>\d+)/edit/$', StudentUpdateView.as_view(),
-        name='students_edit'),
+    #url(r'^students/(?P<pk>\d+)/edit/$', StudentUpdateView.as_view(),
+     #   name='students_edit'),
+    url(r'^students/(?P<sid>\d+)/edit/$', students.views.students_9.students_edit, name='students_edit'),
     url(r'^students/(?P<pk>\d+)/delete/$', StudentDeleteView.as_view(),
         name='students_delete'),
 

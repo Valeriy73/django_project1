@@ -1,0 +1,89 @@
+{% extends "students/base.html" %}
+
+	{% block status_message %}
+		{% if errors %}
+			<div class="alert alert-warning" role="alert">
+				Будь-ласка, виправте наступні помилки
+			</div>
+		{% endif %}
+	{% endblock %} 
+
+{% load static from staticfiles %}
+
+{% block meta_title%}Редагування Студента{% endblock meta_title%}
+
+{% block title %}Редагування Студента{% endblock title %}
+
+{% block content %}
+	<form action="/students/{{ sid.sid }}/edit/" method="post" enctype="multipart/form-data" class="form-horizontal">
+	{% csrf_token %}
+		<div class="form-group {% if errors.first_name %}has-error{% endif %}">
+			<label for="first_name" class="col-sm-2 control-label">Ім'я*</label>
+			<div class="col-sm-10">
+				<input type="text" name="first_name" value="{{ student.first_name }}" id="first_name" />
+				<span class="help-block">{{errors.first_name}}</span>
+			</div>
+		</div>
+		<div class="form-group {% if errors.last_name %}has-error{% endif %}">
+			<label for="last_name" class="col-sm-2 control-label">Прізвище*</label>
+			<div class="col-sm-10">
+				<input type="text" name="last_name" value="{{ student.last_name }}" id="last_name" placeholder="Введіть ваше прізвище" />
+				<span class="help-block">{{errors.last_name}}</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="middle_name" class="col-sm-2 control-label">По-батькові</label>
+			<div class="col-sm-10">
+				<input type="text" name="middle_name" value="{{ student.middle_name }}" id="middle_name">
+			</div>
+		</div>
+		<div class="form-group {% if errors.first_name %}has-error{% endif %}">
+			<label for="birthday" class="col-sm-2 control-label">Дата народження*</label>
+			<div class="col-sm-10">
+			
+				<input type="text" name="birthday" value="{{ student.birthday|date:'Y-m-d' }}" id="birthday" placeholder="Напр. 1984-12-30">
+				<span class="help-block">{{errors.birthday}}</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="photo" class="col-sm-2 control-label">Фото</label>
+			<div class="col-sm-10">
+				
+				<input type="file" name="photo" value="{{ student.photo }}" id="photo">
+				<span class="help-block">{{errors.photo}}</span>
+			</div>
+		</div>
+		<div class="form-group {% if errors.first_name %}has-error{% endif %}">
+			<label for="ticket" class="col-sm-2 control-label">Білет*</label>
+			<div class="col-sm-10">
+				<input type="text" name="ticket" value="{{ student.ticket }}" id="ticket">
+				<span class="help-block">{{errors.ticket}}</span>
+			</div>
+		</div>
+		<div class="form-group {% if errors.first_name %}has-error{% endif %}">
+			<label for="student_group" class="col-sm-2 control-label">Група*</label>
+			<div class="col-sm-10">
+				<select name="student_group" id="student_group" class="form-control">
+					<option value="">Виберіть групу</option>
+					{% for group in groups %}
+					<option value="{{group.id}}" {% if group.title == student.student_group.title %}selected="1"{% endif %}>{{group.title}}</option>
+					{% endfor %}
+				</select>
+				<span class="help-block">{{errors.student_group}}</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="notes" class="col-sm-2 control-label">Додаткові Нотатки</label>
+			<div class="col-sm-10">
+				<textarea class="form-control" name="notes" id="notes">{{ student.notes }}</textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label"></label>
+			<div class="col-sm-10">
+				<input type="submit" name="add_button" value="Додати" class="btn btn-primary" />
+				<button type="submit" name="cancel_button" class="btn btn-link">Скасувати</button>
+			</div>
+		</div>
+	</form>
+{% endblock content %}

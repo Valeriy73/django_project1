@@ -25,6 +25,7 @@ SECRET_KEY = 'wqd2sokcyltd^f$6%pq-bp&qe8#&a3@9h#%o48q@(j%r#awjrk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = []
 
 
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django.contrib.sites',
     'contact_form',
+
 ]
 
 MIDDLEWARE_CLASSES = [

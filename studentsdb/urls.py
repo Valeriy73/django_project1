@@ -22,6 +22,7 @@ import students.views.contact_admin
 import students.views.students_9
 from .settings import MEDIA_ROOT, DEBUG
 from students.views.students import StudentUpdateView, StudentDeleteView, StudentCreateView
+from students.views.groups import GpoupsDelete
 from students.views.contact_admin import ContactAdmin
 
 urlpatterns = [
@@ -31,9 +32,9 @@ urlpatterns = [
     #    name='students_add'),
     url(r'^students/add/$', StudentCreateView.as_view(),
         name='students_add'),
-    #url(r'^students/(?P<pk>\d+)/edit/$', StudentUpdateView.as_view(),
-     #   name='students_edit'),
-    url(r'^students/(?P<sid>\d+)/edit/$', students.views.students_9.students_edit, name='students_edit'),
+    url(r'^students/(?P<pk>\d+)/edit/$', StudentUpdateView.as_view(),
+        name='students_edit'),
+    #url(r'^students/(?P<sid>\d+)/edit/$', students.views.students_9.students_edit, name='students_edit'),
     url(r'^students/(?P<pk>\d+)/delete/$', StudentDeleteView.as_view(),
         name='students_delete'),
 
@@ -42,7 +43,7 @@ urlpatterns = [
     url(r'^groups/add/$', students.views.groups.groups_add, name='groups_add'),
     url(r'^groups/(?P<gid>\d+)/edit/$', students.views.groups.groups_edit,
         name='groups_edit'),
-    url(r'^groups/(?P<gid>\d+)/delete/$', students.views.groups.groups_delete,
+    url(r'^groups/(?P<pk>\d+)/delete/$', GpoupsDelete.as_view(),
         name='groups_delete'),
 
     # Journal urls

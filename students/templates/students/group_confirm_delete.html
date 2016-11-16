@@ -1,0 +1,17 @@
+{% extends "students/base.html" %}
+
+{% load static from staticfiles %}
+
+{% block meta_title %} Видалення групи {% endblock meta_title %}
+
+{% block title %} Видалення групи {% endblock title %}
+
+{% block content %}
+	<form action="{% url "groups_delete" object.id %}" method="post">
+		{% csrf_token %}
+		<p>Ви впевнені що хочете це зробити c "{{ object }}"?</p>
+		<input type="submit" value="Да" name="delete_buton" class="btn btd-danger" /><br><br>
+	</form>
+
+
+{% endblock content %}

@@ -79,16 +79,21 @@ def students_edit(request, sid):
 
 ## Delete Student
 
-def delete_student(request):
-    student_del = Student.objects.get(sid)
+def delete_student(request, sid):
+    try:
+        student_del = Student.objects.get(id = sid)
+    except Exception:
+        messages.warning(request, u"Такого студента немає в базі")
+        return HttpResponseRedirect(reverse('home'))
+
     if request.method == "GET":
         return render(request, 'students/students_confirm_delete1.html', {"student": student_del})
     elif request.method == "POST":
-        elif request.POST.get('delete_yes') is not None:
+        if request.POST.get('delete_yes') is not None:
             try:
                 student_del.delete()
             except Exception:
-                messages.warrning(request, u"Студента %s %s видалити не вдалось" % (student_del.first_name, student_del.last_name))
+                messages.warning(request, u"Студента %s %s видалити не вдалось" % (student_del.first_name, student_del.last_name))
                 return HttpResponseRedirect(reverse('home'))
             else:
                 messages.success(request, u"Студента %s %s видалено успішно" % (student_del.first_name, student_del.last_name))
@@ -96,6 +101,4 @@ def delete_student(request):
         else:
             messages.success(request, u"Дію відмінено")
             return HttpResponseRedirect(reverse('home'))
-
-   
 

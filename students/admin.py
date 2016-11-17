@@ -7,6 +7,7 @@ from django.forms import ModelForm, ValidationError
 from .models.student import Student
 from .models.group import Group
 
+
 class StudentFormAmin(ModelForm):
 
     def clean_student_group(self):
@@ -30,12 +31,21 @@ class StudentAdmin(admin.ModelAdmin):
     ordering = ['last_name']
     list_filter = ['student_group']
     list_per_page = 10
-    search_fields = ['last_name', 'first_name', 'middle_name', 'tickets', 'notes']
+    search_fields = ['last_name', 'first_name', 'middle_name', 'ticket', 'notes']
     form = StudentFormAmin
 
     def view_on_site(self, obj):
         return reverse('students_edit', kwargs={'pk': obj.id})
 
+
+class GroupsAdmin(admin.ModelAdmin):
+    list_display = ['title', 'leader']
+    list_editable = ['leader']
+    ordering = ['title']
+    list_per_page = 3
+    list_filter = ['leader']
+    search_fields = ['title', 'leader', 'notes']
+
 # Register your models here.
 admin.site.register(Student, StudentAdmin)
-admin.site.register(Group)
+admin.site.register(Group, GroupsAdmin)

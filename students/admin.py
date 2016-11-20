@@ -6,6 +6,7 @@ from django.forms import ModelForm, ValidationError
 
 from .models.student import Student
 from .models.group import Group
+import pdb
 
 
 class StudentFormAmin(ModelForm):
@@ -15,6 +16,7 @@ class StudentFormAmin(ModelForm):
 
         If yes, then ensure it's the same as selected group."""
         # get group where current student is a leader
+
         groups = Group.objects.filter(leader=self.instance)
         if len(groups) > 0 and \
             self.cleaned_data['student_group'] != groups[0]:
@@ -38,6 +40,21 @@ class StudentAdmin(admin.ModelAdmin):
         return reverse('students_edit', kwargs={'pk': obj.id})
 
 
+class GroupStudentAdmin(ModelForm):
+    #pdb.set_trace()
+    """docstring for GroupStudentAdmin"""
+    def clean_leader(self):
+
+
+        students = Student.objects.filter(student_group = self.instance)
+
+
+        if self.cleaned_data['leader'] not in students:
+            raise ValidationError(u'Студент не належить до ціеї групи.',
+                                              code='invalid')
+        return self.cleaned_data['leader']
+
+
 class GroupsAdmin(admin.ModelAdmin):
     list_display = ['title', 'leader']
     list_editable = ['leader']
@@ -45,6 +62,12 @@ class GroupsAdmin(admin.ModelAdmin):
     list_per_page = 3
     list_filter = ['leader']
     search_fields = ['title', 'leader', 'notes']
+
+    form = GroupStudentAdmin
+
+
+    #def view_on_site(self, obj):
+    #    return reverse('groups_edit', kwargs={'pk': obj.id})
 
 # Register your models here.
 admin.site.register(Student, StudentAdmin)

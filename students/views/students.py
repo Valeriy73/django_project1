@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime
 from django.views.generic import UpdateView, DeleteView, CreateView
-from django.forms import ModelForm
+from django.forms import ModelForm, ValidationError
 
 from django.contrib import messages
 
@@ -17,6 +17,8 @@ from crispy_forms.bootstrap import FormActions
 
 from ..models.student import Student
 from ..models.group import Group
+
+import pdb
 
 # Views for Students
 def students_list(request):
@@ -146,6 +148,19 @@ class StudentUpdateForm(ModelForm):
         model = Student
         fields = fields = ['first_name', 'last_name', 'middle_name',
          'birthday', 'photo', 'ticket', 'notes', 'student_group']
+
+    def clean_student_group(self):
+
+
+        groups = Group.objects.filter(leader=self.instance)
+        if len(groups) > 0 and \
+            self.cleaned_data['student_group'] != groups[0]:
+            raise ValidationError(u'Студент є старостою іншої групи.\
+                ',
+                code='invalid')
+        return self.cleaned_data['student_group']
+
+
     def __init__(self, *args, **kwargs):
         super(StudentUpdateForm, self).__init__(*args, **kwargs)
 
@@ -214,6 +229,7 @@ class StudentCreateView(CreateView):
 
 
 class StudentUpdateView(UpdateView):
+    #pdb.set_trace()
     model = Student
     template_name = 'students/students_edit.html'
     form_class = StudentUpdateForm
@@ -229,6 +245,7 @@ class StudentUpdateView(UpdateView):
         else:
             return super(StudentUpdateView, self).post(request, *args, **kwargs)
 
+    
 
 
 #def students_delete(request, sid):

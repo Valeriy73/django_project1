@@ -35,10 +35,10 @@ urlpatterns = [
     url(r'^students/(?P<pk>\d+)/edit/$', StudentUpdateView.as_view(),
         name='students_edit'),
     #url(r'^students/(?P<sid>\d+)/edit/$', students.views.students_9.students_edit, name='students_edit'),
-    #url(r'^students/(?P<pk>\d+)/delete/$', StudentDeleteView.as_view(),
-    #    name='students_delete'),
-    url(r'^students/(?P<sid>\d+)/delete/$', students.views.students_9.delete_student,
+    url(r'^students/(?P<pk>\d+)/delete/$', StudentDeleteView.as_view(),
         name='students_delete'),
+    #url(r'^students/(?P<sid>\d+)/delete/$', students.views.students_9.delete_student,
+    #    name='students_delete'),
 
     # Groups urls
     url(r'^groups/$', students.views.groups.groups_list, name='groups'),

@@ -21,6 +21,7 @@ import students.views.journal
 import students.views.contact_admin
 from .settings import MEDIA_ROOT, DEBUG
 from students.views.students import StudentUpdateView, StudentDeleteView
+from students.views.journal import JournalView
 
 urlpatterns = [
     # Students urls
@@ -41,9 +42,9 @@ urlpatterns = [
         name='groups_delete'),
 
     # Journal urls
-    url(r'^journal/$', students.views.journal.journal_list, name='journal'),
-    url(r'^journal/(?P<jid>\d+)/$', students.views.journal.journal_stud, name='journal_stud'),
-    url(r'^journal/update', students.views.journal.journal_update, name='journal_update'),
+    url(r'^journal/$', JournalView.as_view(), name='journal'),
+    #url(r'^journal/(?P<jid>\d+)/$', students.views.journal.journal_stud, name='journal_stud'),
+    #url(r'^journal/update', students.views.journal.journal_update, name='journal_update'),
 
     # Contact Admin Form
     url(r'^contact-admin/$', students.views.contact_admin.contact_admin, name='contact_admin'),

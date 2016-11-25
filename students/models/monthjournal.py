@@ -4,6 +4,7 @@ from django.db import models
 
 class MonthJournal(models.Model):
     """Student Monthly Journal"""
+
     class Meta:
         verbose_name=u'Місячний Журнал'
         verbose_name_plural = u'Місячні Журнали'

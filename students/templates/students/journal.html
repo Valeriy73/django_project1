@@ -10,12 +10,16 @@
 
 {% if not students %}
 
-<div class="alert alert-warning">
-	Поки немає жодного студента в базі. Будь-ласка,
-	<a href="{% url "students_add" %}">додайте</a> першого.
-</div>
+    <div class="alert alert-warning">
+    	Поки немає жодного студента в базі. Будь-ласка,
+    	<a href="{% url "students_add" %}">додайте</a> першого.
+    </div>
 
 {% else %}
+    <div class="alert alert-warning">
+        Зміни в журнал зберігаються автоматично при кожному кліку в клітинці таблиці
+        <span id="ajax-progress-indicator">Йде збереження...</span>
+    </div>
     <p id="journal-nav" class="text-center">
     	<a href="?month={{ prev_month }}" 
     	title="Попередній Місяць">&larr;</a>

@@ -40,7 +40,7 @@
 		<div class="form-group {% if errors.first_name %}has-error{% endif %}">
 			<label for="birthday" class="col-sm-2 control-label">Дата народження*</label>
 			<div class="col-sm-10">
-				<input type="text" name="birthday" value="{{ request.POST.birthday }}" id="birthday" placeholder="Напр. 1984-12-30">
+				<input type="text" name="birthday" value="{{ request.POST.birthday }}" id="birthday" class="dateinput" placeholder="Напр. 1984-12-30">
 				<span class="help-block">{{errors.birthday}}</span>
 			</div>
 		</div>

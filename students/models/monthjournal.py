@@ -5,6 +5,7 @@ from django.db import models
 class MonthJournal(models.Model):
     """Student Monthly Journal"""
 
+
     class Meta:
         verbose_name=u'Місячний Журнал'
         verbose_name_plural = u'Місячні Журнали'
@@ -13,6 +14,8 @@ class MonthJournal(models.Model):
     # we only need year and month, so always set day to first day of the month
     date = models.DateField(verbose_name=u'Дата', blank=False)
     # list of days, each says whether student was present or not
+ 
+
     present_day1 = models.BooleanField(default=False)
     present_day2 = models.BooleanField(default=False)
     present_day3 = models.BooleanField(default=False)
@@ -44,6 +47,6 @@ class MonthJournal(models.Model):
     present_day29 = models.BooleanField(default=False)
     present_day30 = models.BooleanField(default=False)
     present_day31 = models.BooleanField(default=False)
+
     def __unicode__(self):
         return u'%s: %d, %d' % (self.student.last_name, self.date.month, self.date.year)
-

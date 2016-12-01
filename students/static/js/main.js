@@ -56,8 +56,92 @@ function initDateFields(){
 	});
 }
 
+// Функція ініціалізації AJAX форми
+function initEditStudentForm(form, modal){
+	// attach datepicker
+	initDateFields();
+
+	// close madal window on Cancel batton click
+	form.find('input[name="cancel_button"]').click(function(event){
+		modal.modal('hide')
+		return false;
+	});
+
+	// make form work in AJAX mode
+	form.ajaxForm({
+		'dataType': 'html',
+		'error': function(){
+			alert('Помилка на сервері. Спробуйте будь-ласка пізніше.');
+			return false;
+		},
+		'success': function(data, status, xhr){
+			var html = $(data), newform = html.find('#content-column form');
+
+		// copy alert to modal window
+		modal.find('.modal-body').html(html.find('.alert'));
+
+		// copy form to modal if we found it in server response
+		if (newform.length > 0){
+			modal.find('.modal-body').append(newform);
+
+			// initialize form fields and buttons
+			initEditStudentForm(newform, modal);
+		} else {
+			// if no form, it means success and we nee to reload page
+			// to get updated students list;
+			// reload after 2 seconds, so that user can read
+			// success message
+			setTimeout(function(){location.reload(true);}, 500);
+		}
+		}
+	});
+}
+
+//Заготовка для модальних вікон
+//Робимо запит на сервер і відображаємо форму редагування в модальному вікні
+function initEditStudentPage(){
+	$('a.student-edit-form-link').click(function(event){
+		var link = $(this);
+		$.ajax({
+			'url': link.attr('href'),
+			'dataType': 'html',
+			'type': 'get',
+			'success': function(data, status, xhr){
+				// check if we got successfull response from server
+				if (status != 'success'){
+					alert('Помилка на сервері. Спробуйте будь-ласка пізніше.');
+					return false;
+				}
+				// update modal window arrived content from the server
+				var modal = $('#myModal'),
+				html = $(data), form = html.find('#content-column form');
+				modal.find('.modal-title').html(html.find('#content-column h2').text());
+				modal.find('.modal-body').html(form);
+
+				// init our edit form
+				initEditStudentForm(form, modal);
+
+				// setup and show modal window finally
+				modal.modal({
+					'show': true,
+					'keyboard': false,
+					'backdrop': false
+				});
+			},
+			'error': function(){
+				alert('Помилка на сервері. Спробуйте будь-ласка пізніше.');
+			}
+		});
+		
+		return false;
+	});
+}
+
+
+
 $(document).ready(function(){
 	initJournal();
 	initGroupSelector();
 	initDateFields();
+	initEditStudentPage();
 });

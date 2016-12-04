@@ -58,6 +58,12 @@ class JournalView(TemplateView):
         context['next_month'] = next_month.strftime('%Y-%m-%d')
         context['year'] = month.year
         context['month_verbose'] = month.strftime('%B')
+        # количество записей в журнале студентов с данной датой
+        number_row = Student.objects.all().count()
+        number_page = number_row//10+1
+        first_diap = 0
+        end_diap = 9
+
 
         # we'll use this variable in students pagination
         context['cur_month'] = month.strftime('%Y-%m-%d')
@@ -70,16 +76,24 @@ class JournalView(TemplateView):
             'verbose': day_abbr[weekday(myear, mmonth, d)][:2]}
             for d in range(1, number_of_days+1)]
 
+        # Отримуємо номер сторінки, разраховуємо діапазон
+        if self.request.GET.get("page"):
+            page = int(self.request.GET.get("page"))
+            first_diap += (page-1)*10
+            end_diap = page*10 if (page != number_page) else number_row
+        else:
+            end_diap = end_diap if number_row//10 else number_row%10
+
+
         # get all students from database, or just one if we need to
         # display journal for one student
         if kwargs.get('pk'):
             queryset = [Student.objects.get(pk=kwargs['pk'])]
         else:
-            queryset = Student.objects.all().order_by('last_name')
+            queryset = Student.objects.all().order_by('last_name')[first_diap:end_diap]
 
         # url to update student presence, for form post
         update_url = reverse('journal')
-
         # пробігаємось по усіх студентах і збираємо
         # необхідні дані:
         students = []
@@ -114,8 +128,9 @@ _day%d' %
 
 
                 # застосовуємо пагінацію, 10 студентов на страницеів
-        context = paginate(students, 10, self.request, context,
+        context = paginate(Student.objects.all(), 10, self.request, context,
                     var_name='students')
+        context['students'] = students
 
 
                 # повертаємо оновлений словник із даними

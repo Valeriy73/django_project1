@@ -1,5 +1,8 @@
 function initJournal(){
 	var indicator = $('#ajax-progress-indicator');
+	var alert_error = $('#error-alert')
+	var alert_info = $('#alert-info')
+	var msg_error
 
 	$('.day-box input[type="checkbox"]').click(function(event){
 		var box = $(this);
@@ -14,16 +17,26 @@ function initJournal(){
 				'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
 			},
 			'beforeSend': function(xhr, status, error){
+				alert_info.show();
 				indicator.show();
+				alert_error.hide();
+				$('#msg_error').text();
 			},
 			'error': function(xhr, status, error){
-				alert(error);
+				msg_error = error
+				alert_info.hide();
 				indicator.hide();
+				alert_error.show();
 			},
 			'success': function(data, status, xhr){
 				indicator.hide();
+				alert_error.hide();
 			}
 		});
+	});
+
+	$('#error-alert strong').click(function(){
+		$('#msg_error').text(msg_error);
 	});
 }
 

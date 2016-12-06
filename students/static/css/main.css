@@ -52,6 +52,15 @@ th.day-header{
 	vertical-align: middle !important;
 	text-align: center;
 }
+#alert-info{
+	display: visible;
+}
 #ajax-progress-indicator{
 	display: none;
+}
+#error-alert{
+	display: none;
+}
+#error-alert strong{
+cursor: pointer;
 }

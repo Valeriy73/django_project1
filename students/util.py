@@ -14,7 +14,7 @@ def paginate(objects, size, request, context, var_name='object_list'):
 
     It returns update context object.
     """
-    
+
     #import pdb; pdb.set_trace()
     # apply pagination
     paginator = Paginator(objects, size)

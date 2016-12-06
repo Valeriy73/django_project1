@@ -17,6 +17,7 @@ from crispy_forms.bootstrap import FormActions
 from ..models.student import Student
 from ..models.group import Group
 
+
 # Views for Students
 def students_list(request):
     # check if we need to show only one group of students

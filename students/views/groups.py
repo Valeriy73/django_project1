@@ -5,11 +5,16 @@ from django.http import HttpResponse
 # from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from ..models.group import Group
-from ..util import paginate
+from ..util import paginate, get_current_group
+
 
 # Views for Groups
 def groups_list(request):
-    groups = Group.objects.all()
+    current_group = get_current_group(request).title
+    if current_group:
+        groups = Group.objects.filter(title=current_group)
+    else:
+        groups = Group.objects.all()
     # try to order groups list
     order_by = request.GET.get('order_by', '')
     if order_by in ('title', 'leader'):

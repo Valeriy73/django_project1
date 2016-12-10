@@ -58,6 +58,7 @@ def get_groups(request):
             })
     return groups
 
+
 def get_current_group(request):
     """Returns currently selected group or None"""
 

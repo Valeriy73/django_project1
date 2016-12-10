@@ -9,7 +9,7 @@ from django.views.generic.base import TemplateView
 
 from ..models.student import Student
 from ..models.monthjournal import MonthJournal
-from ..util import paginate
+from ..util import paginate, get_current_group
 
 from django.http import JsonResponse
 
@@ -59,7 +59,11 @@ class JournalView(TemplateView):
         context['year'] = month.year
         context['month_verbose'] = month.strftime('%B')
         # количество записей в журнале студентов с данной датой
-        number_row = Student.objects.all().count()
+        current_group = get_current_group(self.request)
+        if current_group:
+            number_row = Student.objects.filter(student_group=current_group).count()
+        else:
+            number_row = Student.objects.all().count()
         number_page = number_row//10+1
         first_diap = 0
         end_diap = 9
@@ -89,6 +93,8 @@ class JournalView(TemplateView):
         # display journal for one student
         if kwargs.get('pk'):
             queryset = [Student.objects.get(pk=kwargs['pk'])]
+        elif current_group:
+            queryset = Student.objects.filter(student_group=current_group).order_by('last_name')[first_diap:end_diap]
         else:
             queryset = Student.objects.all().order_by('last_name')[first_diap:end_diap]
 
@@ -128,7 +134,11 @@ _day%d' %
 
 
                 # застосовуємо пагінацію, 10 студентов на страницеів
-        context = paginate(Student.objects.all(), 10, self.request, context,
+        if current_group:
+            context = paginate(Student.objects.filter(student_group=current_group), 10, self.request, context,
+                    var_name='students')
+        else:
+            context = paginate(Student.objects.all(), 10, self.request, context,
                     var_name='students')
         context['students'] = students
 

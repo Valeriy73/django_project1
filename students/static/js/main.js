@@ -65,7 +65,8 @@ function initGroupSelector(){
 
 function initDateFields(){
 	$('input.dateinput').datetimepicker({
-		'format': 'YYYY-MM-DD'
+		'format': 'YYYY-MM-DD',
+		locale: 'ru'
 	});
 }
 

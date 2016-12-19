@@ -10,8 +10,8 @@ from django.forms import ModelForm
 
 from ..util import paginate, get_current_group
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
-from crispy_forms.bootstrap import FormActions
+from crispy_forms.layout import Submit, Layout, Field
+from crispy_forms.bootstrap import FormActions, AppendedText
 
 
 from ..models.student import Student
@@ -131,7 +131,7 @@ class StudentUpdateForm(ModelForm):
     class Meta:
         model = Student
         fields = '__all__'
-        
+
     def __init__(self, *args, **kwargs):
         super(StudentUpdateForm, self).__init__(*args, **kwargs)
 
@@ -147,6 +147,10 @@ class StudentUpdateForm(ModelForm):
         self.helper.html5_required = True
         self.helper.label_class = 'col-sm-2 control-label'
         self.helper.field_class = 'col-sm-10'
+
+        self.helper.layout[3:5] = Layout(
+            AppendedText('birthday', '<span class="glyphicon glyphicon-calendar"></span>', active=True)
+           )
 
         # add buttons
         self.helper.layout[-1] = FormActions(

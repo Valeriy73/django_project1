@@ -88,7 +88,7 @@ def students_add(request):
                 errors['student_group'] = u"Оберіть групу для студента"
             else:
                 groups = Group.objects.filter(pk=student_group)
-                if len(groups) !=1:
+                if len(groups) != 1:
                     errors['student-group'] = u"Оберіть коректну групу"
                 else:
                     data['student_group'] = groups[0]
@@ -107,7 +107,7 @@ def students_add(request):
             # Якшо дані були введені некоректно:
                 # Вшддаємо шаблон форми разом із знайденими помилками
             else:
-                return render (request, 'students/students_add.html',
+                return render(request, 'students/students_add.html',
                     {'groups': Group.objects.all().order_by('title'),
                     'errors': errors})
         # Якщо кнопка Скасувати була натиснута:
@@ -117,8 +117,8 @@ def students_add(request):
     # Якщо форма не була запощена:
         # повертаємо код початкового стану форми
     else:
-        return render (request, 'students/students_add.html',
-                    {'groups': Group.objects.all().order_by('title')})
+        return render(request, 'students/students_add.html',
+                      {'groups': Group.objects.all().order_by('title')})
 
     return render(request, 'students/students_add.html',
                   {'groups': Group.objects.all().order_by('title')})
@@ -126,6 +126,7 @@ def students_add(request):
 #def students_edit(request, sid):
 #
 #    return HttpResponse('<h1>Edit students %s</h1>' %sid)
+
 
 class StudentUpdateForm(ModelForm):
     class Meta:
@@ -158,6 +159,7 @@ class StudentUpdateForm(ModelForm):
             Submit('cancel_button', u'Скасувати', css_class="btn btn-link"),
             )
 
+
 class StudentUpdateView(UpdateView):
     model = Student
     template_name = 'students/students_edit.html'
@@ -173,9 +175,9 @@ class StudentUpdateView(UpdateView):
             return super(StudentUpdateView, self).post(request, *args, **kwargs)
 
 
-
 #def students_delete(request, sid):
 #    return HttpResponse('<h1>Delete Students %s</h1>' %sid)
+
 
 class StudentDeleteView(DeleteView):
     model = Student

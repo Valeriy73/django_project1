@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+
 # Create your models here.
 class Student(models.Model):
     """Student Model"""
@@ -21,7 +22,6 @@ class Student(models.Model):
     ticket = models.CharField(max_length=256, blank=False, verbose_name=u"Білет")
     student_group = models.ForeignKey('Group', blank=False, verbose_name=u"Група", null=True, on_delete=models.PROTECT)
     notes = models.TextField(blank=True, verbose_name=u"Додаткові нотатки")
-
 
     def __unicode__(self):
         return u"%s %s" % (self.first_name, self.last_name)

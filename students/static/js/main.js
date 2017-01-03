@@ -71,11 +71,12 @@ function initDateFields(){
 }
 
 // Функція ініціалізації AJAX форми
-function initEditStudentForm(form, modal){
+function initEditStudentForm(form, modal, link){
 	// attach datepicker
 	initDateFields();
 
-	// close madal window on Cancel batton click
+	
+	// close modal window on Cancel batton click
 	form.find('input[name="cancel_button"]').click(function(event){
 		modal.modal('hide')
 		return false;
@@ -90,10 +91,11 @@ function initEditStudentForm(form, modal){
 		},
 		'success': function(data, status, xhr){
 			var html = $(data), newform = html.find('#content-column form');
-
+			
 		// copy alert to modal window
-		modal.find('.modal-body').html(html.find('.alert'));
 
+		modal.find('.modal-body').html(html.find('.alert'));
+		
 		// copy form to modal if we found it in server response
 		if (newform.length > 0){
 			modal.find('.modal-body').append(newform);
@@ -105,7 +107,14 @@ function initEditStudentForm(form, modal){
 			// to get updated students list;
 			// reload after 2 seconds, so that user can read
 			// success message
-			setTimeout(function(){location.reload(true);}, 500);
+			var idstudent = "tr#student" + link.attr('href').split('/')[2];
+			
+			//var curentpage = $(idstudent);
+			//alert(curentpage.html());
+			//alert(html.find(idstudent).html());
+			$(idstudent).replaceWith(html.find(idstudent));
+			initEditStudentPage();
+			//setTimeout(function(){location.reload(true);}, 500);
 		}
 		}
 	});
@@ -133,7 +142,7 @@ function initEditStudentPage(){
 				modal.find('.modal-body').html(form);
 
 				// init our edit form
-				initEditStudentForm(form, modal);
+				initEditStudentForm(form, modal, link);
 
 				// setup and show modal window finally
 				modal.modal({

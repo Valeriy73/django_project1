@@ -40,7 +40,7 @@
 						<tbody>
 							
 							{% for student in students %}
-							<tr>
+							<tr id="student{{ student.id }}">
 								<td>{{ forloop.counter}}</td>
 								<td>
                                    {% if student.photo %} 

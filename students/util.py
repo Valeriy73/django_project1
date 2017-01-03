@@ -15,7 +15,7 @@ def paginate(objects, size, request, context, var_name='object_list'):
     It returns update context object.
     """
 
-    #import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
     # apply pagination
     paginator = Paginator(objects, size)
 
@@ -38,6 +38,7 @@ def paginate(objects, size, request, context, var_name='object_list'):
     context['paginator'] = paginator
 
     return context
+
 
 def get_groups(request):
     """ Returns list of existing groups """

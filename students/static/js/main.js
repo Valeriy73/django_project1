@@ -82,6 +82,14 @@ function initEditStudentForm(form, modal, link){
 		return false;
 	});
 
+	var alert_load_modal = $("#alert-load-modal");
+	form.find('input[name="add_button"]').click(function(event){
+		alert_load_modal.show();
+
+	});
+
+	
+
 	// make form work in AJAX mode
 	form.ajaxForm({
 		'dataType': 'html',
@@ -93,7 +101,7 @@ function initEditStudentForm(form, modal, link){
 			var html = $(data), newform = html.find('#content-column form');
 			
 		// copy alert to modal window
-
+		
 		modal.find('.modal-body').html(html.find('.alert'));
 		
 		// copy form to modal if we found it in server response
@@ -123,13 +131,19 @@ function initEditStudentForm(form, modal, link){
 //Заготовка для модальних вікон
 //Робимо запит на сервер і відображаємо форму редагування в модальному вікні
 function initEditStudentPage(){
+	alert_load = $("#alert-load")
 	$('a.student-edit-form-link').click(function(event){
 		var link = $(this);
 		$.ajax({
 			'url': link.attr('href'),
 			'dataType': 'html',
 			'type': 'get',
+			'beforeSend': function(xhr, status, error){
+				alert_load.show();
+			},
 			'success': function(data, status, xhr){
+				alert_load.hide();
+				alert(link.attr('href'));
 				// check if we got successfull response from server
 				if (status != 'success'){
 					alert('Помилка на сервері. Спробуйте будь-ласка пізніше.');
@@ -152,6 +166,7 @@ function initEditStudentPage(){
 				});
 			},
 			'error': function(){
+				alert_load.hide();
 				alert('Помилка на сервері. Спробуйте будь-ласка пізніше.');
 			}
 		});
@@ -159,7 +174,37 @@ function initEditStudentPage(){
 		return false;
 	});
 }
+//Оновлення вкладки "Відвідування"
+function loadJornal(){
+	$('a.load-journal').click(function(event){
+		var link = $(this);
+		$.ajax({
+			'link': '/journal/',
+			'dataType': 'html',
+			'type': 'get',
+			'success': function(data, status, xhr){
+				alert(data);
+				// check if we got successfull response from server
+				if (status != 'success'){
+					alert('Помилка на сервері. Спробуйте будь-ласка пізніше.');
+					return false;
+				};
+				//var html = $(data);
+				
+				//var were = html.find('#content-column');
+				//$('#content-column').html(were);
+				
 
+			},
+			'error': function(){
+				
+				alert('Помилка на сервері. Спробуйте будь-ласка пізніше.');
+			}
+		});
+		return false;
+		
+	});
+}
 
 
 $(document).ready(function(){
@@ -167,4 +212,5 @@ $(document).ready(function(){
 	initGroupSelector();
 	initDateFields();
 	initEditStudentPage();
+	loadJornal();
 });

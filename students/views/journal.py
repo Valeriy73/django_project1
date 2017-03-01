@@ -132,8 +132,7 @@ _day%d' %
                 'update_url': update_url,
             })
 
-
-                # застосовуємо пагінацію, 10 студентов на страницеів
+    # застосовуємо пагінацію, 10 студентов на страницеів
         if current_group:
             context = paginate(Student.objects.filter(student_group=current_group), 10, self.request, context,
                     var_name='students')
@@ -143,5 +142,5 @@ _day%d' %
         context['students'] = students
 
 
-                # повертаємо оновлений словник із даними
+    # повертаємо оновлений словник із даними
         return context

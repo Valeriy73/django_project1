@@ -24,11 +24,13 @@
                 	</thead>
                     {% endwith %}
                 	<tbody>
+                        
                 		{% for groups in groups %}
                         <tr>
                 			<td>{{ forloop.counter }}</td>
                 			<td><a title="Редагувати" href="{% url "groups_edit" groups.id %}">{{ groups.title }}</a></td>
-                			<td><a title="Редагувати" href="{% url "groups_edit" groups.id %}">{{ groups.leader }}</a></td>
+                			
+                            <td><a class="student-edit-form-link" title="Редагувати" href="{% url "students_edit" groups.leader_id %}">{{ groups.leader }}</a></td>
                 			<td>
                 				<div class="dropdown">
                 				    <button class="btn btn-default dropdown" type="button" data-toggle="dropdown">

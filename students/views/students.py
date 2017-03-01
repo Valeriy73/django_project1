@@ -10,7 +10,7 @@ from django.forms import ModelForm
 
 from ..util import paginate, get_current_group
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field
+from crispy_forms.layout import Submit, Layout, Field, HTML
 from crispy_forms.bootstrap import FormActions, AppendedText
 
 
@@ -149,6 +149,7 @@ class StudentUpdateForm(ModelForm):
         self.helper.label_class = 'col-sm-2 control-label'
         self.helper.field_class = 'col-sm-10'
 
+        self.helper.layout.insert(0, HTML('<!-- Alert download --><div id="alert-load-modal"><div class="load-block"><p>Loading...</p><img src="/static/img/Loading_icon.gif" alt=""></div></div>'))
         self.helper.layout[3:5] = Layout(
             AppendedText('birthday', '<span class="glyphicon glyphicon-calendar"></span>', active=True)
            )

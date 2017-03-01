@@ -76,3 +76,39 @@ th.day-header{
 #error-alert strong{
 cursor: pointer;
 }
+#alert-load{
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	text-align: center;
+	background-color: rgba(225, 225, 225, 0.5);
+	z-index: 100;
+	
+}
+#alert-load-modal{
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	text-align: center;
+	background-color: rgba(225, 225, 225, 0.5);
+	z-index: 100;
+	
+}
+.load-block{
+	margin-top: 100px;
+	position: relative;
+}
+#alert-load p{
+	font-size: 30px;
+}
+#alert-load img{
+	
+	max-height: 50px;
+	
+}

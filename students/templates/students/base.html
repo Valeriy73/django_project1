@@ -54,7 +54,7 @@
 
 						<li role="presentation" {% if request.path == '/' %}class="active"{% endif %}><a href="{% url "home" %}">Студенти</a></li>
 
-						<li role="presentation" {% if '/journal' in request.path %}class="active"{% endif %}><a href="{% url "journal" %}">Відвідувіння</a></li>
+						<li role="presentation" {% if '/journal' in request.path %}class="active"{% endif %}><a class="load-journal" href="{% url "journal" %}">Відвідування</a></li>
 
 						<li role="presentation" {% if '/groups' in request.path %}class="active"{% endif %}><a href="{% url "groups" %}">Групи</a></li>
 
@@ -74,6 +74,13 @@
 					<div class="alert alert-warning" role="alert">{{ request.GET.status_message }}</div>
 					{% endif %}
 					{% endblock %}
+					<!-- Alert download -->
+					<div id="alert-load">
+						<div class="load-block">
+							<p>Loading...</p>
+						 	<img src="{% static "img/Loading_icon.gif" %}" alt="">
+						</div>
+					</div>
 
 					<h2>{% block title %}{% endblock title %}</h2>
 					{% block content %}{% endblock content %}

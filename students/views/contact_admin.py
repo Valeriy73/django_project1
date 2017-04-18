@@ -10,6 +10,9 @@ from studentsdb.settings import ADMIN_EMAIL
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
+import logging
+
+
 class ContactForm(forms.Form):
     from_email = forms.EmailField(label = u"Ваша Емейл Адреса")
     subject = forms.CharField(label = u"Заголовок листа", max_length=128)
@@ -55,6 +58,8 @@ def contact_admin(request):
             except Exception:
                 message = u'Під час відправки листа виникла непередбачувана ' \
                           u'помилка. Спробуйте скористатись даною формою пізніше.'
+                logger = logging.getLogger(__name__)
+                logger.exception(message)
             else:
                 message = u'Повідомлення успішно надіслане!'
 

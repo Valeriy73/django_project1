@@ -1,10 +1,11 @@
+{% load i18n %}
 {% load static from staticfiles %}
 
 <!DOCTYPE html>
 <html lang="uk">
 	<head>
 		<meta charset="utf-8"/>
-		<title>Сервіс обліку студентів - {% block meta_title%}{% endblock meta_title%} </title>
+		<title>{% trans "Students Accounting Service" %} - {% block meta_title%}{% endblock meta_title%} </title>
 		<meta name="description" value ="Система обліку студетів навчального закладу" />
 
 		<!-- Include Styles -->

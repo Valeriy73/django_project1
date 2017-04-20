@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-19 20:05+0000\n"
+"POT-Creation-Date: 2017-04-20 19:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,89 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: templates/students/base.html:8
+#: templates/students/base.html:8 templates/students/base.html:29
+#: templates/students/base.html:90
 msgid "Students Accounting Service"
-msgstr ""
+msgstr "Сервіс Обліку Студентів"
+
+#: templates/students/base.html:9
+msgid "App to manage students database"
+msgstr "Система обліку студетів навчального закладу"
+
+#: templates/students/base.html:35
+msgid "Group:"
+msgstr "Група:"
+
+#: templates/students/base.html:37
+msgid "All Students"
+msgstr "Усі Студенти"
+
+#: templates/students/base.html:56 templates/students/students_list.html:7
+msgid "Students"
+msgstr "Студенти"
+
+#: templates/students/base.html:58 templates/students/students_list.html:65
+msgid "Journal"
+msgstr "Відвідування"
+
+#: templates/students/base.html:60
+msgid "Groups"
+msgstr "Групи"
+
+#: templates/students/base.html:62
+msgid "Contact"
+msgstr "Контакт"
+
+#: templates/students/students_confirm_delete.html:7
+#: templates/students/students_confirm_delete.html:9
+msgid "Delete Student"
+msgstr "Видалити Студента"
+
+#: templates/students/students_confirm_delete.html:16
+#, python-format
+msgid "Do you really want to delete student: \"%(object)s\"?"
+msgstr "Ви дійсно хочете видалити студента: \"%(object)s\"?"
+
+#: templates/students/students_confirm_delete.html:18
+msgid "Yes"
+msgstr "Так"
+
+#: templates/students/students_list.html:9
+msgid "Students List"
+msgstr "Список Студентів"
+
+#: templates/students/students_list.html:13
+msgid "Add Student"
+msgstr "Додати Студента"
+
+#: templates/students/students_list.html:20
+msgid "Photo"
+msgstr "Фото"
+
+#: templates/students/students_list.html:22
+msgid "Last Name"
+msgstr "Прізвище"
+
+#: templates/students/students_list.html:27
+msgid "First Name"
+msgstr "Імʼя"
+
+#: templates/students/students_list.html:33
+msgid "Ticket #"
+msgstr "№ Білету"
+
+#: templates/students/students_list.html:38
+msgid "Actions"
+msgstr "Дії"
+
+#: templates/students/students_list.html:60
+msgid "Action"
+msgstr "Дія"
+
+#: templates/students/students_list.html:68
+msgid "Edit"
+msgstr "Редагувати"
+
+#: templates/students/students_list.html:71
+msgid "Delete"
+msgstr "Видалити"

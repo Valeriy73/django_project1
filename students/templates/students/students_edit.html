@@ -1,9 +1,11 @@
 {% extends "students/base.html" %}
 
+{% load i18n %}
+
 	{% block status_message %}
 		{% if errors %}
 			<div class="alert alert-warning" role="alert">
-				Будь-ласка, виправте наступні помилки
+				{% trans "Please correct the following errors" %}
 			</div>
 		{% endif %}
 	{% endblock %} 
@@ -11,9 +13,9 @@
 {% load static from staticfiles %}
 {% load crispy_forms_tags %}
 
-{% block meta_title%}Редагувати Студента{% endblock meta_title%}
+{% block meta_title%}{% trans "Edit Student" %}{% endblock meta_title%}
 
-{% block title %}Редагувати Студента{% endblock title %}
+{% block title %}{% trans "Edit Student" %}{% endblock title %}
 
 {% block content %}
 

@@ -1,32 +1,37 @@
 {% extends "students/base.html" %}
 
+{% load i18n %}
+
 {% load static from staticfiles %}
 
-{% block meta_title%}Облік Відвідування{% endblock meta_title%}
+{% block meta_title%}{% trans "Accounting Visits" %}{% endblock meta_title%}
 
-{% block title %}Облік Відвідування{% endblock title %}
+{% block title %}{% trans "Accounting Visits" %}{% endblock title %}
 
 {% block content %}
 
 {% if not students %}
 
     <div class="alert alert-warning">
-    	Поки немає жодного студента в базі. Будь-ласка,
-    	<a href="{% url "students_add" %}">додайте</a> першого.
+        {% trans "While no student in the database. Please, " %}
+            
+        <a href="{% url "students_add" %}">{% trans "add" %}</a> {% trans "first." %}
+        
+    	
     </div>
 
 {% else %}
     <div class="alert alert-warning">
-        Зміни в журнал зберігаються автоматично при кожному кліку в клітинці таблиці
-        <span id="ajax-progress-indicator">Йде збереження...</span>
+        {% trans "Changes are saved automatically log each click in a table cell" %}
+        <span id="ajax-progress-indicator">{% trans "There is a saving ..." %}</span>
     </div>
     <p id="journal-nav" class="text-center">
     	<a href="?month={{ prev_month }}" 
-    	title="Попередній Місяць">&larr;</a>
+    	title="{% trans "Previous month" %}">&larr;</a>
 	    <!-- TODO: translate month name -->
 	    <strong>{{ month_verbose }} {{ year }}</strong>
 	    <a href="?month={{ next_month }}"
-	     title="Наступний місяць">&rarr;</a>
+	     title="{% trans "Next Month" %}">&rarr;</a>
     </p>
 
     <table class="table table-hover table-striped table-bordered" 
@@ -34,7 +39,7 @@
     	<thead>
     		<tr class="header">
     			<th class="num">#</th>
-    			<th class="name">Студент</th>
+    			<th class="name">{% trans "Student" %}</th>
     			{% for day in month_header %}
     				<th class="day-header">
     				<!-- TODO: translate day name -->
@@ -66,7 +71,7 @@
 
     			<td>
     				<a href="{% url "students_edit" student.id %}"
-    					title="Редагувати" target="_blank">
+    					title="{% trans "Edit" %}" target="_blank">
     					{{ student.fullname }}		
     				</a>
     			</td>
